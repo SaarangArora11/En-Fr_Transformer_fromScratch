@@ -42,7 +42,8 @@ Code Highlight: Scaled Dot-Product Attention
 
 I implemented the core attention mechanism manually to ensure control over the masking and scaling dimensions:
 
-`Python
+```
+Python
 def scaled_dot_product_attention(q, k, v, use_causal_mask=False):
     d_k = tf.cast(tf.shape(k)[-1], tf.float32)
     scores = tf.matmul(q, k, transpose_b=True) # Matmul of Q and K
@@ -51,7 +52,8 @@ def scaled_dot_product_attention(q, k, v, use_causal_mask=False):
         scaled_scores = mask_attn_weights(scaled_scores) # Apply Mask
     weights = tf.nn.softmax(scaled_scores, axis=-1) 
     output = tf.matmul(weights, v) 
-    return output`
+    return output
+```
 
 ## Performance & Results
 
@@ -62,43 +64,37 @@ The model was trained for 30 epochs on a dataset of ~175k sentence pairs.
   * Loss: Converged to ~0.35 (Validation)
 
 Translation Examples
-Input (English)	Model Output (French)
-"Tom isn't joking."	[start] tom ne blague pas [end]
-"We'll all be there together."	[start] nous serons tous ensemble [end]
-"I overslept again."	[start] jai encore trop entendu [end]
+|Input (English) | Model Output (French) |
+|---|---|
+|"Tom isn't joking." | [start] tom ne blague pas [end]|
+|"We'll all be there together." | [start] nous serons tous ensemble [end]|
+|"I overslept again."	| [start] jai encore trop entendu [end]|
 
 (Note: Some translations, like the last one, show the model capturing syntax but struggling with specific idiomatic vocabulary ("trop entendu" vs "dormi trop tard"), which is expected with smaller embedding dimensions).
-## Project Structure
-
-    en-fr-using-transformers.ipynb: The main notebook containing data loading, model definition, training loop, and inference logic.
-
-    eng_-french.csv: (Reference) The dataset source used for training.
-
 ## Usage
 
-    Clone the repo:
+Clone the repo:
+```
     Bash
 
-    git clone https://github.com/yourusername/your-repo-name.git
-
-    Install dependencies:
+    git clone https://github.com/SaarangArora11/En-Fr_Transformer_fromScratch.git
+```
+Install dependencies:
+```
     Bash
 
-    pip install tensorflow pandas numpy matplotlib seaborn
-
-    Run the notebook:
-    Open en-fr-using-transformers.ipynb in Jupyter or Google Colab and execute the cells sequentially.
+     pip install tensorflow pandas numpy matplotlib seaborn
+```
+Run the notebook:
+    * Open en-fr-using-transformers.ipynb in Jupyter or Google Colab and execute the cells sequentially.
 
 ## Future Improvements
 
-    > Implement Beam Search decoding for better translation quality than Greedy Search.
-
-    Replace the custom tokenizer with Byte-Pair Encoding (BPE) or a WordPiece tokenizer to handle out-of-vocabulary words better.
-
-    Scale up the embedding dimensions (currently 512) and head count for higher accuracy.
+  > Implement Beam Search decoding for better translation quality than Greedy Search.
+  > Replace the custom tokenizer with Byte-Pair Encoding (BPE) or a WordPiece tokenizer to handle out-of-vocabulary words better.
+  > Scale up the embedding dimensions (currently 512) and head count for higher accuracy.
 
 ## Credits
 
-    Dataset: Anki/Tatoeba Project
-
-    Architecture Reference: Attention Is All You Need (Vaswani et al., 2017)
+  * Dataset: Anki/Tatoeba Project
+  * Architecture Reference: Attention Is All You Need (Vaswani et al., 2017)
