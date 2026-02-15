@@ -41,9 +41,9 @@ The model follows the standard Encoder-Decoder architecture:
 Code Highlight: Scaled Dot-Product Attention
 
 I implemented the core attention mechanism manually to ensure control over the masking and scaling dimensions:
-Python
 
-`def scaled_dot_product_attention(q, k, v, use_causal_mask=False):
+`Python
+def scaled_dot_product_attention(q, k, v, use_causal_mask=False):
     d_k = tf.cast(tf.shape(k)[-1], tf.float32)
     scores = tf.matmul(q, k, transpose_b=True) # Matmul of Q and K
     scaled_scores = scores / tf.math.sqrt(d_k) # Scale
