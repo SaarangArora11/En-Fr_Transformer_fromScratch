@@ -87,9 +87,9 @@ Run the notebook:
 
 ## Future Improvements
 
-  > Implement Beam Search decoding for better translation quality than Greedy Search.
-  > Replace the custom tokenizer with Byte-Pair Encoding (BPE) or a WordPiece tokenizer to handle out-of-vocabulary words better.
-  > Scale up the embedding dimensions (currently 512) and head count for higher accuracy.
+  * Implement Beam Search decoding for better translation quality than Greedy Search.
+  * Replace the custom tokenizer with Byte-Pair Encoding (BPE) or a WordPiece tokenizer to handle out-of-vocabulary words better.
+  * Scale up the embedding dimensions (currently 512) and head count for higher accuracy.
 
 ## Credits
 
